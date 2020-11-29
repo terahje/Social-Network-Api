@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const UserSchema = new Schema({
     username: {
@@ -19,8 +19,18 @@ const UserSchema = new Schema({
         },
         required: [true,'Please provide your name!']
       },
-    thoughts: [],
-    friends: [],
+    thoughts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
+        }
+    ],
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
     },
     {
       toJSON: {
@@ -29,13 +39,14 @@ const UserSchema = new Schema({
       },
       id: false
 });
-// create the User model using the UserSchema
-const User = model('User', UserSchema);
 
 // get total count of comments and replies on retrieval
 UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
   });
+
+  // create the User model using the UserSchema
+const User = model('User', UserSchema);
 
 // export the User model
 module.exports = User;
