@@ -17,7 +17,7 @@ const UserSchema = new Schema({
             },
             message: 'Please enter a valid email'
         },
-        required: [true,'Please provide your name!']
+        required: [true,'Please provide your email!']
       },
     thoughts: [
         {
@@ -40,12 +40,12 @@ const UserSchema = new Schema({
       id: false
 });
 
-// get total count of comments and replies on retrieval
+// get total count of friends on retrieval
 UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
   });
 
-  // create the User model using the UserSchema
+// create the User model using the UserSchema
 const User = model('User', UserSchema);
 
 // export the User model

@@ -1,5 +1,6 @@
-//const Thought = require('./Thought.js');
 const User = require('./User.js');
+const Thought = require('./Thought.js');
 
-// add Thought back when add model
-module.exports = { User}
+
+
+module.exports = { User, Thought }
