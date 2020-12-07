@@ -50,7 +50,7 @@ const ThoughtSchema = new Schema(
           required: 'Username required!'
       },
       // use ReactionSchema to validate data for a reaction
-      reactions: [ReactionSchema]
+      reactions: [ReactionSchema],
     },
     {
       toJSON: {

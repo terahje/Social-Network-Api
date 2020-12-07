@@ -14,10 +14,15 @@ const thoughtController = {
       // get one Thought by id
       getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
+        .populate({
+          path: 'reactions',
+          select: '-__v'
+        })
+        .select('-__v')
           .then(dbThoughtData => {
-            // If no Thought is found, send 404
+            // If no thought is found, send 404
             if (!dbThoughtData) {
-              res.status(404).json({ message: 'No Thought found with this id!' });
+              res.status(404).json({ message: 'No thoughts found with this id!' });
               return;
             }
             res.json(dbThoughtData);
@@ -28,21 +33,21 @@ const thoughtController = {
           });
       },
       // createThought
-    createThought({ body }, res) {
+    createThought({ params, body }, res) {
             Thought.create(body)
                 .then(({ _id }) => {
                 return User.findOneAndUpdate(
-                    { _id: body.userId },
+                    { _id: params.userId },
                     { $push: { thought: _id } },
                     { new: true }
                 );
                 })
-                .then(dbUserData => {
-                if (!dbUserData) {
+                .then(dbThoughtData => {
+                if (!dbThoughtData) {
                     res.status(404).json({ message: 'No thought found with this id!' });
                     return;
                 }
-                res.json(dbUserData);
+                res.json(dbThoughtData);
                 })
                 .catch(err => res.json(err));
         },
