@@ -11,7 +11,6 @@ The beginning of a social media api that allows you to create a username and int
 
 ## Table of Contents
 [Installation](#installation)<br>
-[Usage](#usage)<br>
 [License](#license)<br>
 [Questions](#questions)<br>
 ***
@@ -19,9 +18,6 @@ The beginning of a social media api that allows you to create a username and int
 npm i express<br>
 npm i mongoose<br>
 
-
-## Usage
-![](/screencast.gif)
 
 ## License
 ### This license is covered under the following license(s):
